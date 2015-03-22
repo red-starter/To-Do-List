@@ -1,0 +1,71 @@
+<!doctype html>
+<!-- define angular module -->
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <!--Optimize mobile viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>A productivity app</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+
+</head>
+<body ng-controller="mainCtrl">
+    <div class="container">
+        <div class="row">
+            <div id="info" class="jumbotron text-center">
+                <span ng-show="posts.length>0" class="label label-danger animate-show">
+                    Number of tasks left: {{posts.length}}
+                </span>
+                <span ng-show="posts.length==0" class="label label-success animate-show">
+                    No tasks left, go out and enjoy life
+                </span>
+            </div>
+        </div>
+
+        <div id="post-form" class="row page-header">
+            <!--FORM TO CREATE posts-->
+            <form>
+                <div class="form-group">
+
+                    <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                    <input type="text" class="form-control input-lg text-center" placeholder="please enter a task" ng-model="formData.text">
+                </div>
+
+                <!-- createToDo() WILL CREATE NEW posts -->
+                <button type="submit" class="btn btn-success text-center" ng-click="createPost()">Add</button>
+            </form>
+        </div>
+        <!--_TODO LIST-->
+        <div id="post-list" class="row">
+            <div class="table-responsive">
+                <table class="table">
+                    <col width="15%">
+<!--                     <col width="15%">
+ -->                    <col width="70%">
+                    <thead>
+                        <tr>
+                            <th> Delete</th>
+<!--                             <th> Task number</th>
+ -->                            <th> Post </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="post in posts">
+                            <td><input type="checkbox" ng-click="deletePost(post._id)"></td>
+<!--                             <td> {{formData}} </td>
+ -->                            <td>{{post.text}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
